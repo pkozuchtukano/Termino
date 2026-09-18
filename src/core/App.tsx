@@ -1,6 +1,6 @@
 import { StatusBar } from 'react-native';
 
-import { HomeScreen } from '../screens/HomeScreen';
+import { HomeScreen } from '@/features/home/HomeScreen';
 
 export default function App() {
   return (

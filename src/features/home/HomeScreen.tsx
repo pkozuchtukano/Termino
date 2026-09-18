@@ -4,9 +4,9 @@ export function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text accessibilityRole="header" style={styles.title}>
-        Termino
+        Terminie
       </Text>
-      <Text style={styles.subtitle}>Projekt zainicjalizowany</Text>
+      <Text style={styles.subtitle}>Projekt gotowy</Text>
     </View>
   );
 }

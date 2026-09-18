@@ -1,6 +1,6 @@
-# Termino
+# Terminie
 
-Termino to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. T0.1 zawiera wyłącznie ekran startowy; MVP jest przeznaczone na Androida.
+Terminie to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. Obecny fundament zawiera wyłącznie lokalny ekran startowy; MVP jest przeznaczone na Androida.
 
 ## Wymagania
 
@@ -34,9 +34,7 @@ Uruchom emulator lub podłącz urządzenie (`adb devices`), następnie:
 npm run android
 ```
 
-Skrypt zawsze otwiera wybór urządzenia (`expo run:android --device`). Nie wybieraj przepełnionego `Pixel_9a_Levermany`. Lokalnie przygotowano osobny `Termino_API_36_1` (Pixel 9, Android API 36.1, partycja danych 12 GB); jest dostępny w Android Studio → Device Manager.
-
-Stan lokalnego testu: APK zainstalowano na nowym AVD, ale obraz API 36.1 powoduje restart SurfaceFlinger. Ten AVD wymaga naprawy środowiska przed testem UI; do tego czasu można użyć telefonu z debugowaniem USB.
+Skrypt zawsze otwiera wybór urządzenia (`expo run:android --device`). Wybierz działający emulator lub telefon z wolnym miejscem. Lokalnie do walidacji M1-T1 używany jest `Termino_API_36`; nie wybieraj wcześniejszego, niestabilnego `Termino_API_36_1`.
 
 Polecenie generuje projekt natywny, buduje i instaluje Dev Client oraz uruchamia Metro. Kolejne sesje ze zbudowanym klientem:
 
@@ -44,7 +42,7 @@ Polecenie generuje projekt natywny, buduje i instaluje Dev Client oraz uruchamia
 npm start
 ```
 
-Naciśnij `a`, aby otworzyć aplikację na Androidzie. Oczekiwany ekran: „Termino” / „Projekt zainicjalizowany”. Po zmianach modułów natywnych ponownie wykonaj `npm run android`.
+Naciśnij `a`, aby otworzyć aplikację na Androidzie. Oczekiwany ekran: „Terminie” / „Projekt gotowy”. Po zmianach modułów natywnych ponownie wykonaj `npm run android`. Po zmianach aliasów w `tsconfig.json` zrestartuj Metro. Szczegóły struktury i decyzji znajdują się w `/docs`.
 
 ## Jakość
 

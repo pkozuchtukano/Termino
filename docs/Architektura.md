@@ -1,4 +1,10 @@
-# Termino — decyzje architektoniczne
+# Terminie — architektura i decyzje
+
+## Stan M1-T1
+
+Wdrożone: React Native 0.86.3, React 19.2.3, Expo 57 / Dev Client, TypeScript strict, npm z lockfile, ESLint i Prettier. Ekran „Terminie / Projekt gotowy” renderuje wyłącznie lokalny tekst. Brak nawigacji, store, bazy i wywołań sieciowych aplikacji. Metro/Babel korzystają z domyślnych ustawień Expo; brak test runnera.
+
+Planowane: WatermelonDB / SQLite, ML Kit OCR, Notifee, Google Drive API i opcjonalna integracja Google Calendar zgodnie z bazowym planem. Nie są zainstalowane ani zaimplementowane. Offline-first: przyszłe dane trwałe i reguły biznesowe działają lokalnie, integracje nie blokują operacji. Dev Client potrzebuje lokalnego Metro do pobrania kodu; nie jest samodzielnym buildem produkcyjnym.
 
 Status poniższych ADR: **zaakceptowane**, data: **2026-09-18**. Decyzje opisują kierunek; T0.1 nie implementuje modułów biznesowych.
 
@@ -18,13 +24,15 @@ Status poniższych ADR: **zaakceptowane**, data: **2026-09-18**. Decyzje opisuj�
 | ADR-012 | Notifee obsługuje lokalne przypomnienia; Google Calendar jest opcjonalną integracją kalendarza. Żaden nie jest źródłem prawdy dla terminu dokumentu.                                |
 | ADR-013 | Google Calendar należy do MVP; osobny moduł po utworzeniu stabilnego modelu domenowego.                                                                                             |
 
-## Organizacja kodu — T0.1
+## Organizacja kodu — M1-T1
 
-- `index.ts`: rejestracja aplikacji; `src/app/App.tsx`: składanie UI; `src/screens/HomeScreen.tsx`: ekran startowy.
-- Kolejne warstwy tworzymy dopiero z rzeczywistym kodem: `domain` (typy/reguły bez React Native), `data` (repozytoria), `services` (przypadki użycia), `infrastructure` (baza i adaptery), `components` (wspólne UI), `utils` (wspólne funkcje), `navigation` (po dodaniu kolejnych ekranów).
+- `index.ts`: `registerRootComponent` Expo; `src/core/App.tsx`: składanie aplikacji; `src/features/home/HomeScreen.tsx`: obecny ekran.
+- Feature-first: kod konkretnej funkcjonalności trafia do `src/features/<feature>`. `documents` i `settings` powstaną dopiero przy ich implementacji. `core` zawiera inicjalizację i przyszłą konfigurację aplikacji; `shared` powstanie dla faktycznie współdzielonych elementów, bez zależności od feature'ów. Nie tworzymy pustych katalogów ani warstw na zapas.
+- Alias `@/*` → `src/*` jest zdefiniowany w `tsconfig.json` i używany w entry oraz App. Expo Metro natywnie odczytuje `paths`; nie dodajemy resolvera Babel ani `baseUrl`. Po zmianie aliasów należy zrestartować Metro.
 - UI wywołuje przypadki użycia; domena nie importuje SDK integracji. Adaptery realizują kontrakty wymagane przez domenę/przypadki użycia.
 - Native `android/` generuje Expo Prebuild (CNG); nie wersjonujemy go. Trwałe zmiany natywne zapisujemy w konfiguracji Expo/pluginach.
 - `com.termino.app` to roboczy identyfikator lokalnego development buildu, do zatwierdzenia przed dystrybucją. Nie przesądza własności domeny ani nazwy w sklepie.
+- Nazwa wyświetlana od M1-T1: „Terminie”. Techniczne `slug`, nazwa pakietu npm i applicationId pozostają bez zmian; aktualizacja nie tworzy osobnej aplikacji ani nie usuwa danych. Historyczne ADR-y i nazwa planowanego backupu pozostają zachowane.
 - Nowe zależności dopiero w tasku, który ich używa. Zmiany bazy wyłącznie przez bezstratne migracje.
 
 ## Warianty startu

@@ -1,10 +1,19 @@
-# Termino — Plan produktu i architektury v0.1
+# Terminie — Plan produktu i architektury v0.1
 
 Dokument jest planem bazowym, nie niezmiennym kontraktem. Kolejne decyzje mogą go modyfikować. Zaakceptowane zmiany architektoniczne zapisujemy w [Architektura.md](Architektura.md), a implementacyjne w [Zmiany.md](Zmiany.md). Każdy przyszły task aktualizuje dziennik zmian.
 
 ## 1. Architektura i stos
 
-Termino to aplikacja offline-first i serverless: podstawowa logika biznesowa działa lokalnie na urządzeniu, bez własnego backendu. Android jest platformą MVP; iOS pozostaje poza bieżącym zakresem. Domena nie powinna zależeć od Androida.
+Terminie to aplikacja offline-first i serverless: podstawowa logika biznesowa działa lokalnie na urządzeniu, bez własnego backendu. Android jest platformą MVP; iOS pozostaje poza bieżącym zakresem. Domena nie powinna zależeć od Androida.
+
+## Kolejność prac
+
+- M1-T1 — fundament: zakończony 2026-09-18; strict, lint, format, eksport Metro, build Android i ekran na emulatorze zweryfikowane.
+- M1-T2 — nawigacja i App Shell: planowane.
+- M1-T3 — model domenowy dokumentu: planowane.
+- M1-T4 — bootstrap WatermelonDB: planowane.
+- M1-T5 — pierwszy pionowy flow lokalnego dokumentu: planowane.
+- Później: import/zdjęcia, OCR, Notifee, Google Drive; Calendar jako osobna integracja zgodnie z ADR-013.
 
 Planowany stos: React Native, TypeScript, Expo Custom Development Build / Dev Client, WatermelonDB / SQLite, Google ML Kit Document Scanner API, Google ML Kit Text Recognition, Notifee, Google Drive REST API v3, Google Sign-In oraz Google Calendar jako pierwsza integracja kalendarza.
 

@@ -1,5 +1,11 @@
 # Zmiany projektu
 
+## Fundament aplikacji
+
+### 2026-09-18 — M1-T1 / Feature-first i alias importów
+
+Przeniesiono składanie aplikacji do `src/core`, ekran do `src/features/home`, dodano używany alias `@/*` i tekst „Terminie / Projekt gotowy”. Zachowano strict oraz zależności. Typecheck, lint, bundlowanie i build Android przeszły; zweryfikowano ekran na emulatorze. Pełny wpis i ograniczenia: [docs/Zmiany.md](docs/Zmiany.md).
+
 ## Bootstrap i dokumentacja
 
 ### 2026-09-18 — T0.1 / Wybór urządzenia przed instalacją
