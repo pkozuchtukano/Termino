@@ -1,12 +1,12 @@
 # Termino — Dark Spatial UI
 
-Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów: src/shared/theme/index.ts. Zmiana stylu wymaga aktualizacji obu miejsc. Kierunek: ciemny Spatial UI, karty Bento, pływająca nawigacja, amber CTA, cyan actions i violet deadline widget. Podstawą M1-T2b jest specyfikacja tekstowa; obrazu referencji nie dostarczono.
+Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów: src/shared/theme/index.ts. Zmiana stylu wymaga aktualizacji obu miejsc. Kierunek: ciemny Spatial UI, karty Bento, pływająca nawigacja, amber CTA, cyan actions i violet deadline widget. Podstawą jest specyfikacja M1-T2b i przesłana wizualizacja dwóch telefonów. Odwzorowujemy język wizualny, bez fikcyjnych dokumentów, odliczania i wyników OCR.
 
 ## Tokeny
 
 | Token koloru    | Wartość                | Zastosowanie                        |
 | --------------- | ---------------------- | ----------------------------------- |
-| background      | #090C12                | Tło i tekst na amber                |
+| background      | #090C12                | Tło aplikacji                       |
 | surface         | #11161D                | Karty i podgląd                     |
 | surfaceElevated | #151A22                | Nawigacja, micro-cards, pola        |
 | border          | rgba(255,255,255,0.14) | Cienkie obramowania                 |
@@ -18,9 +18,11 @@ Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów
 | violetTint      | rgba(114,103,255,0.12) | Tło terminów                        |
 | violetBorder    | rgba(114,103,255,0.45) | Obramowanie terminów                |
 | cyanTint        | rgba(37,230,230,0.10)  | Nieaktywne CTA                      |
-| cyanBorder      | rgba(37,230,230,0.35)  | Obramowanie nieaktywnego CTA        |
+| cyanBorder      | rgba(37,230,230,0.65)  | Obramowanie nieaktywnego CTA        |
 
-Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRadius = 24; microCardRadius = 18; primaryCtaRadius = 30; touchTarget = 48. Kolory komponentów pochodzą wyłącznie z tokenów. Systemowa typografia: opisy 16/24, nagłówki kart 20, ekran 32, centralny stan terminów 28. Tekst może się skalować i zawijać.
+Dodatkowe tokeny: amberTint = #241E15 (ciemne wypełnienie Skanuj), violetText = #A69FFF (czytelny fioletowy tekst i narożniki), scannerSurface = #0D1117 (ciemny podgląd).
+
+Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRadius = 24; microCardRadius = 18; primaryCtaRadius = 30; touchTarget = 48. Kolory komponentów pochodzą wyłącznie z tokenów. Systemowa typografia: opisy 16/24, nagłówki kart 20, marka 22, podpis ekranu 14, centralny stan terminów 36. Tekst może się skalować i zawijać.
 
 ## Layout i karty Bento
 
@@ -34,17 +36,17 @@ Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRa
 
 Dokumenty / Skanuj / Ustawienia. Zaokrąglony kontener surfaceElevated z obramowaniem, margines boczny 16 plus Safe Area, szerokość maksymalna 720. Dolny odstęp to większa z wartości: inset i 12. Pasek zajmuje własne miejsce w layoucie, więc nie zasłania przewijanej treści; pływający efekt tworzą odsunięcie od krawędzi i cień.
 
-Skanuj: amber, ciemny tekst, promień 30, minimalna wysokość 60, wysunięcie ponad pasek przez marginTop -24. Otwiera osobny ekran stosu, nie trzeci tab. Aktywny tab ma cyan i semantyczny stan selected. Android Back obsługuje istniejący React Navigation.
+Skanuj: ciemne wypełnienie amberTint, bursztynowa ikona aparatu, tekst i obrys, promień 24, minimalna wysokość 84, maksymalna szerokość 116. Dekoracyjne tło paska zaczyna się 22 punkty poniżej górnej krawędzi kontenera; przycisk pozostaje w całości wewnątrz obszaru dotyku rodzica. Ikony Dokumentów i Ustawień są geometryczne, bez nowych zależności. Otwiera osobny ekran stosu, nie trzeci tab. Aktywny tab ma cyan i semantyczny stan selected. Android Back obsługuje istniejący React Navigation.
 
 ## Deadline widget
 
-„Najbliższe terminy”: duża karta violetTint/violetBorder z delikatną poświatą violet. Centralny obszar min. 140, tekst „BRAK TERMINÓW” oraz opis. Brak fikcyjnych liczników, dat i odliczania.
+„Najbliższe terminy”: duża karta violetTint/violetBorder z delikatną poświatą violet. Wyśrodkowany tytuł, centralny obszar min. 110, fioletowy tekst „BRAK TERMINÓW” oraz opis. Brak fikcyjnych liczników, dat i odliczania.
 
 ## Skanowanie i OCR
 
-Natywny tytuł „Skanowanie i OCR”. Podgląd min. 300 z czterema cyjanowymi narożnikami i jawną informacją o nieaktywnym aparacie. Narożniki dekoracyjne, bez animacji, bounding boxes i pozorowanego wykrycia.
+Natywny tytuł „Skanowanie i OCR”. Podgląd min. 320 z czterema jasnofioletowymi narożnikami i jawną informacją o nieaktywnym aparacie. Narożniki dekoracyjne, bez animacji, bounding boxes i pozorowanego wykrycia.
 
-Dolna karta „Dane z dokumentu”: zawijane pola Data, Kwota, Kategoria z opisem „Brak sugestii”; bez edycji i danych. „Zatwierdź sugestie” używa delikatnego cyan glow, tint zamiast pełnego aktywnego wypełnienia, disabled i accessibilityState.disabled. Niedostępność jest opisana tekstem.
+Dolna karta „Dane z dokumentu” delikatnie zachodzi na dół podglądu (32 punkty przy odstępie sekcji 20). Pionowe pola na całą szerokość: Data, Kwota, Kategoria z opisem „Brak sugestii”; bez edycji i danych. „Zatwierdź sugestie” ma podłużny kształt (promień 30), jasny tekst, obrys i delikatny cyan glow, ciemny tint, disabled i accessibilityState.disabled. Niedostępność jest opisana tekstem.
 
 ## Nazewnictwo i accessibility
 
@@ -62,7 +64,7 @@ Wspólne, typowane effects: card (kolor background, offset 0/4, opacity 0.18, ra
 
 - Wspólne tokeny palety, odstępów, promieni i efektów; ciemny motyw nawigacji.
 - Dashboard: Termino, dokumenty, pusty violet widget i układ Bento bez danych demonstracyjnych.
-- Pływający pasek z amber Skanuj i cyan zaznaczeniem aktywnej sekcji.
+- Pływający pasek z ikonami i obrysowanym amber Skanuj i cyan zaznaczeniem aktywnej sekcji.
 - Ustawienia: Synchronizacja, Powiadomienia, Dane lokalne — jawnie niedostępne karty informacyjne.
 - Podgląd przyszłego skanowania, pola kontraktu UI i nieaktywne zatwierdzanie.
 

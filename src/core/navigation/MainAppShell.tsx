@@ -11,6 +11,7 @@ import type {
 import { DocumentsScreen } from '@/features/documents/DocumentsScreen';
 import { SettingsScreen } from '@/features/settings/SettingsScreen';
 import { effects, tokens } from '@/shared/theme';
+import { SpatialIcon } from '@/shared/components/SpatialIcon';
 const Tabs = createBottomTabNavigator<MainTabParamList>();
 function ShellBar({
   state,
@@ -42,6 +43,10 @@ function ShellBar({
         }
         style={({ pressed }) => [styles.tab, pressed && styles.pressed]}
       >
+        <SpatialIcon
+          name={index === 0 ? 'documents' : 'settings'}
+          color={selected ? tokens.colors.cyan : tokens.colors.textSecondary}
+        />
         <Text style={[styles.label, selected && styles.selected]}>
           {descriptors[route.key].options.title}
         </Text>
@@ -60,6 +65,7 @@ function ShellBar({
       ]}
     >
       <View style={styles.bar}>
+        <View pointerEvents="none" style={styles.barSurface} />
         {section(0)}
         <Pressable
           accessibilityRole="button"
@@ -67,6 +73,7 @@ function ShellBar({
           onPress={onScan}
           style={({ pressed }) => [styles.scan, pressed && styles.pressed]}
         >
+          <SpatialIcon name="camera" color={tokens.colors.amber} />
           <Text style={styles.scanLabel}>Skanuj</Text>
         </Pressable>
         {section(1)}
@@ -102,9 +109,8 @@ export function MainAppShell({
   );
 }
 const styles = StyleSheet.create({
-  barArea: { backgroundColor: tokens.colors.background, paddingTop: 16 },
+  barArea: { backgroundColor: tokens.colors.background, paddingTop: 8 },
   bar: {
-    ...effects.card,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
@@ -112,6 +118,14 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 720,
     alignSelf: 'center',
+  },
+  barSurface: {
+    ...effects.card,
+    position: 'absolute',
+    top: 22,
+    bottom: 0,
+    left: 0,
+    right: 0,
     borderRadius: tokens.primaryCtaRadius,
     backgroundColor: tokens.colors.surfaceElevated,
     borderWidth: 1,
@@ -124,6 +138,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 4,
+    paddingTop: 24,
+    gap: 4,
   },
   label: {
     color: tokens.colors.textSecondary,
@@ -134,17 +150,21 @@ const styles = StyleSheet.create({
   scan: {
     ...effects.amber,
     flex: 1.15,
-    minHeight: 60,
-    borderRadius: tokens.primaryCtaRadius,
-    backgroundColor: tokens.colors.amber,
-    marginTop: -24,
+    minHeight: 84,
+    maxWidth: 116,
+    borderRadius: tokens.cardRadius,
+    backgroundColor: tokens.colors.amberTint,
+    borderWidth: 1,
+    borderColor: tokens.colors.amber,
+    marginBottom: 12,
+    gap: 4,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 12,
   },
   scanLabel: {
-    color: tokens.colors.background,
-    fontSize: 16,
+    color: tokens.colors.amber,
+    fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
   },

@@ -5,6 +5,7 @@ import {
   spatialStyles,
 } from '@/shared/components/SpatialScreen';
 import { effects, tokens } from '@/shared/theme';
+import { SpatialIcon } from '@/shared/components/SpatialIcon';
 export function AddDocumentScreen() {
   return (
     <SpatialScreen title="Skanowanie i OCR" nativeHeader>
@@ -21,13 +22,14 @@ export function AddDocumentScreen() {
           <View style={[styles.corner, styles.bottomLeft]} />
           <View style={[styles.corner, styles.bottomRight]} />
         </View>
+        <SpatialIcon name="camera" />
         <Text style={styles.previewTitle}>Podgląd dokumentu</Text>
         <Text style={styles.previewDescription}>
           Skanowanie i rozpoznawanie tekstu są w przygotowaniu. Aparat jest
           nieaktywny.
         </Text>
       </View>
-      <SpatialCard title="Dane z dokumentu">
+      <SpatialCard title="Dane z dokumentu" style={styles.panel}>
         <Text style={spatialStyles.unavailable}>
           Sugestie pojawią się po udostępnieniu rozpoznawania tekstu.
         </Text>
@@ -35,7 +37,9 @@ export function AddDocumentScreen() {
           {['Data', 'Kwota', 'Kategoria'].map((label) => (
             <View key={label} style={styles.field}>
               <Text style={styles.fieldLabel}>{label}</Text>
-              <Text style={spatialStyles.unavailable}>Brak sugestii</Text>
+              <View style={styles.placeholder}>
+                <Text style={spatialStyles.unavailable}>Brak sugestii</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -58,7 +62,7 @@ export function AddDocumentScreen() {
 }
 const styles = StyleSheet.create({
   frame: {
-    minHeight: 300,
+    minHeight: 320,
     padding: tokens.spacing.section,
     gap: tokens.spacing.md,
     alignItems: 'center',
@@ -66,13 +70,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: tokens.colors.border,
     borderRadius: tokens.cardRadius,
-    backgroundColor: tokens.colors.surface,
+    backgroundColor: tokens.colors.scannerSurface,
   },
   corner: {
     position: 'absolute',
     width: 28,
     height: 28,
-    borderColor: tokens.colors.cyan,
+    borderColor: tokens.colors.violetText,
   },
   topLeft: {
     top: 16,
@@ -109,16 +113,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   previewDescription: { ...spatialStyles.body, textAlign: 'center' },
-  fields: { flexDirection: 'row', flexWrap: 'wrap', gap: tokens.spacing.sm },
+  panel: {
+    backgroundColor: tokens.colors.surfaceElevated,
+    marginTop: -tokens.spacing.section,
+    padding: tokens.spacing.xl,
+  },
+  fields: { gap: tokens.spacing.lg },
   field: {
-    flexGrow: 1,
-    flexBasis: 110,
     gap: tokens.spacing.sm,
+  },
+  placeholder: {
+    minHeight: tokens.touchTarget,
+    justifyContent: 'center',
     padding: tokens.spacing.md,
     borderWidth: 1,
     borderColor: tokens.colors.border,
     borderRadius: tokens.microCardRadius,
-    backgroundColor: tokens.colors.surfaceElevated,
+    backgroundColor: tokens.colors.surface,
   },
   fieldLabel: {
     color: tokens.colors.textPrimary,
@@ -131,14 +142,14 @@ const styles = StyleSheet.create({
     padding: tokens.spacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: tokens.microCardRadius,
+    borderRadius: tokens.primaryCtaRadius,
     borderWidth: 1,
     borderColor: tokens.colors.cyanBorder,
     backgroundColor: tokens.colors.cyanTint,
     marginTop: tokens.spacing.sm,
   },
   confirmLabel: {
-    color: tokens.colors.cyan,
+    color: tokens.colors.textPrimary,
     fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',

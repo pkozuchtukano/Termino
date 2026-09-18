@@ -2,6 +2,12 @@
 
 ## Interfejs i Design System
 
+### 2026-09-18 — M1-T2b / Dopasowanie do przesłanej wizualizacji
+
+- Porównano UI z dostarczonym obrazem: dodano geometryczne ikony nawigacji, ciemny przycisk Skanuj z bursztynowym obrysem, fioletowy napis terminów i bardziej zwarty nagłówek.
+- Panel OCR ma pionowe pola, podłużne cyjanowe CTA i zachodzi na ciemny podgląd z fioletowymi narożnikami. Zachowano polskie treści, puste stany oraz niedostępność przyszłych funkcji.
+- Zaktualizowano DesignSystem.md; bez nowych zależności, zmian danych i logiki nawigacji. Walidacja automatyczna: typecheck, lint, format i UTF-8; ręczny test wykonuje użytkownik.
+
 ### 2026-09-18 — M1-T2b / Reference UI Alignment
 
 - Dopasowano paletę Dark Spatial UI, typowane tokeny i efekty; dashboard ma pusty violet widget i karty Bento. Pływający pasek zawiera amber Skanuj i cyan aktywny tab. Zachowano istniejącą nawigację.

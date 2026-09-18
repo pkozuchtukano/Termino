@@ -8,7 +8,11 @@ import { effects, tokens } from '@/shared/theme';
 export function DocumentsScreen() {
   return (
     <SpatialScreen title="Dokumenty">
-      <SpatialCard title="Najbliższe terminy" style={styles.deadline}>
+      <SpatialCard
+        title="Najbliższe terminy"
+        centeredTitle
+        style={styles.deadline}
+      >
         <View style={styles.deadlineContent}>
           <Text style={styles.emptyTitle}>BRAK TERMINÓW</Text>
           <Text style={styles.centeredBody}>
@@ -17,8 +21,6 @@ export function DocumentsScreen() {
         </View>
       </SpatialCard>
       <SpatialCard title="Twoje dokumenty">
-        <Text style={spatialStyles.eyebrow}>WSZYSTKO W JEDNYM MIEJSCU</Text>
-        <Text style={styles.emptyHeading}>Przestrzeń na ważne sprawy</Text>
         <Text style={spatialStyles.body}>
           Nie masz jeszcze dokumentów. Tutaj pojawią się ich kwoty, daty i
           kategorie.
@@ -53,24 +55,19 @@ const styles = StyleSheet.create({
     borderColor: tokens.colors.violetBorder,
   },
   deadlineContent: {
-    minHeight: 140,
+    minHeight: 110,
     justifyContent: 'center',
     alignItems: 'center',
     gap: tokens.spacing.md,
   },
   emptyTitle: {
-    color: tokens.colors.textPrimary,
-    fontSize: 28,
+    color: tokens.colors.violetText,
+    fontSize: 36,
     fontWeight: '800',
     textAlign: 'center',
     letterSpacing: 1,
   },
   centeredBody: { ...spatialStyles.body, textAlign: 'center' },
-  emptyHeading: {
-    color: tokens.colors.textPrimary,
-    fontSize: 24,
-    fontWeight: '600',
-  },
   microCard: {
     flex: 1,
     borderRadius: tokens.microCardRadius,

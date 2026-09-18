@@ -22,11 +22,15 @@ export function SpatialScreen({
       }
     >
       <ScrollView contentContainerStyle={styles.content}>
-        {!nativeHeader && <Text style={styles.brand}>Termino</Text>}
         {!nativeHeader && (
-          <Text accessibilityRole="header" style={styles.title}>
-            {title}
-          </Text>
+          <View style={styles.heading}>
+            <Text accessibilityRole="header" style={styles.brand}>
+              Termino
+            </Text>
+            <Text accessibilityRole="header" style={styles.title}>
+              {title}
+            </Text>
+          </View>
         )}
         {children}
       </ScrollView>
@@ -37,10 +41,18 @@ export function SpatialCard({
   title,
   children,
   style,
-}: PropsWithChildren<{ title: string; style?: StyleProp<ViewStyle> }>) {
+  centeredTitle = false,
+}: PropsWithChildren<{
+  title: string;
+  style?: StyleProp<ViewStyle>;
+  centeredTitle?: boolean;
+}>) {
   return (
     <View style={[styles.card, style]}>
-      <Text accessibilityRole="header" style={styles.cardTitle}>
+      <Text
+        accessibilityRole="header"
+        style={[styles.cardTitle, centeredTitle && { textAlign: 'center' }]}
+      >
         {title}
       </Text>
       {children}
@@ -75,15 +87,20 @@ const styles = StyleSheet.create({
   },
   brand: {
     color: tokens.colors.textPrimary,
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '700',
     letterSpacing: 1,
   },
   title: {
-    color: tokens.colors.textPrimary,
-    fontSize: 32,
-    fontWeight: '700',
-    marginBottom: 8,
+    color: tokens.colors.textSecondary,
+    fontSize: 14,
+  },
+  heading: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: tokens.spacing.sm,
   },
   card: {
     ...effects.card,
