@@ -4,7 +4,7 @@ import {
   SpatialScreen,
   spatialStyles,
 } from '@/shared/components/SpatialScreen';
-import { effects, tokens } from '@/shared/theme';
+import { effects, tokens, typography } from '@/shared/theme';
 export function DocumentsScreen() {
   return (
     <SpatialScreen title="Dokumenty">
@@ -12,6 +12,7 @@ export function DocumentsScreen() {
         title="Najbliższe terminy"
         centeredTitle
         style={styles.deadline}
+        titleStyle={typography.deadlineTitle}
       >
         <View style={styles.deadlineContent}>
           <Text style={styles.emptyTitle}>BRAK TERMINÓW</Text>
@@ -50,9 +51,13 @@ export function DocumentsScreen() {
 }
 const styles = StyleSheet.create({
   deadline: {
-    ...effects.violet,
-    backgroundColor: tokens.colors.violetTint,
-    borderColor: tokens.colors.violetBorder,
+    ...effects.deadline,
+    backgroundColor: tokens.colors.deadlineSurface,
+    borderColor: tokens.colors.deadlineEdge,
+    borderTopColor: tokens.colors.deadlineHighlight,
+    borderLeftColor: tokens.colors.deadlineHighlight,
+    borderRadius: tokens.microCardRadius,
+    paddingVertical: tokens.spacing.xl,
   },
   deadlineContent: {
     minHeight: 110,
@@ -61,11 +66,8 @@ const styles = StyleSheet.create({
     gap: tokens.spacing.md,
   },
   emptyTitle: {
+    ...typography.deadlineValue,
     color: tokens.colors.violetText,
-    fontSize: 36,
-    fontWeight: '800',
-    textAlign: 'center',
-    letterSpacing: 1,
   },
   centeredBody: { ...spatialStyles.body, textAlign: 'center' },
   microCard: {

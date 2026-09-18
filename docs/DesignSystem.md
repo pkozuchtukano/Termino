@@ -22,7 +22,7 @@ Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów
 
 Dodatkowe tokeny: amberTint = #241E15 (ciemne wypełnienie Skanuj), violetText = #A69FFF (czytelny fioletowy tekst i narożniki), scannerSurface = #0D1117 (ciemny podgląd).
 
-Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRadius = 24; microCardRadius = 18; primaryCtaRadius = 30; touchTarget = 48. Kolory komponentów pochodzą wyłącznie z tokenów. Systemowa typografia: opisy 16/24, nagłówki kart 20, marka 22, podpis ekranu 14, centralny stan terminów 36. Tekst może się skalować i zawijać.
+Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRadius = 24; microCardRadius = 18; primaryCtaRadius = 30; touchTarget = 48. Kolory komponentów pochodzą wyłącznie z tokenów. Systemowa typografia w typowanych tokenach typography: opisy 15/23, waga 400, tracking 0.3; nagłówki kart 21, waga 500, tracking 0.2; tytuł terminów 23, waga 600; główny stan 38, waga 700, tracking -0.8. Android korzysta z sans-serif / sans-serif-medium, iOS z System. Marka 22, podpis ekranu 14. Nie identyfikujemy kroju z ilustracji jako konkretnej rodziny fontu. Tekst może się skalować i zawijać.
 
 ## Layout i karty Bento
 
@@ -40,7 +40,7 @@ Skanuj: ciemne wypełnienie amberTint, bursztynowa ikona aparatu, tekst i obrys,
 
 ## Deadline widget
 
-„Najbliższe terminy”: duża karta violetTint/violetBorder z delikatną poświatą violet. Wyśrodkowany tytuł, centralny obszar min. 110, fioletowy tekst „BRAK TERMINÓW” oraz opis. Brak fikcyjnych liczników, dat i odliczania.
+„Najbliższe terminy”: karta o promieniu 18 z nieprzezroczystą powierzchnią deadlineSurface (#202239), obrysem deadlineEdge (#8F88D4) oraz jaśniejszą górną i lewą krawędzią deadlineHighlight (#83B9C7). Wyśrodkowany tytuł, centralny obszar min. 110, fioletowy tekst „BRAK TERMINÓW” oraz opis. Brak fikcyjnych liczników, dat i odliczania.
 
 ## Skanowanie i OCR
 
@@ -75,3 +75,9 @@ Wspólne, typowane effects: card (kolor background, offset 0/4, opacity 0.18, ra
 - Terminy i przypomnienia, synchronizacja oraz zarządzanie danymi lokalnymi.
 
 Powyższe funkcje nie są realizowane w M1-T2b. Manualny smoke test wykonuje użytkownik.
+
+## Korekta poświaty i typografii z referencji
+
+Karta terminów korzysta z effects.deadline: dwie zewnętrzne warstwy boxShadow (blur 12/24, spread 1/2, offset 0,3 / 0,5) i dwie wewnętrzne (blur 24/22, offset -5,-5 / 0,-8). Tokeny kolorów: deadlineGlow = rgba(114,103,255,0.38), deadlineGlowSoft = rgba(114,103,255,0.18), deadlineInnerCyan = rgba(131,205,218,0.18), deadlineInnerViolet = rgba(133,120,255,0.26). Daje to rozświetlony obrys i miękkie wnętrze zamiast zwykłego cienia elevation. Bez blur library i nowych zależności.
+
+BoxShadow w RN 0.86 wymaga Androida 9+ dla cieni zewnętrznych, 10+ dla wewnętrznych; starsze urządzenia zachowują kolor powierzchni i obramowanie, lecz bez pełnej poświaty. Źródło: https://reactnative.dev/docs/0.86/view-style-props#boxshadow. Efekt wizualny wymaga ręcznej oceny na urządzeniu.

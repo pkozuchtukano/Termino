@@ -1,5 +1,5 @@
 import { DarkTheme, type Theme } from '@react-navigation/native';
-import type { ViewStyle } from 'react-native';
+import { Platform, type TextStyle, type ViewStyle } from 'react-native';
 export const tokens = {
   colors: {
     background: '#090C12',
@@ -16,6 +16,13 @@ export const tokens = {
     violet: '#7267FF',
     violetTint: 'rgba(114,103,255,0.12)',
     violetBorder: 'rgba(114,103,255,0.45)',
+    deadlineSurface: '#202239',
+    deadlineEdge: '#8F88D4',
+    deadlineHighlight: '#83B9C7',
+    deadlineGlow: 'rgba(114,103,255,0.38)',
+    deadlineGlowSoft: 'rgba(114,103,255,0.18)',
+    deadlineInnerViolet: 'rgba(133,120,255,0.26)',
+    deadlineInnerCyan: 'rgba(131,205,218,0.18)',
     cyanTint: 'rgba(37,230,230,0.10)',
     cyanBorder: 'rgba(37,230,230,0.65)',
   },
@@ -25,7 +32,78 @@ export const tokens = {
   primaryCtaRadius: 30,
   touchTarget: 48,
 } as const;
+export const typography = {
+  cardTitle: {
+    fontFamily: Platform.select({
+      android: 'sans-serif-medium',
+      default: 'System',
+    }),
+    fontSize: 21,
+    fontWeight: '500',
+    letterSpacing: 0.2,
+  },
+  cardBody: {
+    fontFamily: Platform.select({ android: 'sans-serif', default: 'System' }),
+    fontSize: 15,
+    lineHeight: 23,
+    fontWeight: '400',
+    letterSpacing: 0.3,
+  },
+  deadlineTitle: {
+    fontFamily: Platform.select({
+      android: 'sans-serif-medium',
+      default: 'System',
+    }),
+    fontSize: 23,
+    fontWeight: '600',
+    letterSpacing: 0.1,
+    textAlign: 'center',
+  },
+  deadlineValue: {
+    fontFamily: Platform.select({ android: 'sans-serif', default: 'System' }),
+    fontSize: 38,
+    fontWeight: '700',
+    letterSpacing: -0.8,
+    textAlign: 'center',
+  },
+} satisfies Record<string, TextStyle>;
 export const effects = {
+  deadline: {
+    elevation: 0,
+    shadowOpacity: 0,
+    boxShadow: [
+      {
+        offsetX: 0,
+        offsetY: 3,
+        blurRadius: 12,
+        spreadDistance: 1,
+        color: tokens.colors.deadlineGlow,
+      },
+      {
+        offsetX: 0,
+        offsetY: 5,
+        blurRadius: 24,
+        spreadDistance: 2,
+        color: tokens.colors.deadlineGlowSoft,
+      },
+      {
+        offsetX: -5,
+        offsetY: -5,
+        blurRadius: 24,
+        spreadDistance: 0,
+        color: tokens.colors.deadlineInnerCyan,
+        inset: true,
+      },
+      {
+        offsetX: 0,
+        offsetY: -8,
+        blurRadius: 22,
+        spreadDistance: 0,
+        color: tokens.colors.deadlineInnerViolet,
+        inset: true,
+      },
+    ],
+  },
   card: {
     shadowColor: tokens.colors.background,
     shadowOffset: { width: 0, height: 4 },

@@ -2,6 +2,12 @@
 
 ## Interfejs i Design System
 
+### 2026-09-18 — M1-T2b / Poświata karty i typografia
+
+- Zastąpiono zwykły cień terminów wielowarstwową poświatą zewnętrzną i wewnętrzną; dodano rozświetlony obrys oraz ciemną fioletową powierzchnię według zbliżenia referencji.
+- Dodano wspólne tokeny systemowej typografii: lżejsze nagłówki kart, subtelny rozstaw liter opisów i ciaśniejszy główny napis. Bez nowych fontów, danych i zależności.
+- DesignSystem.md opisuje wartości i ograniczenie pełnej poświaty do Androida 10+. Walidacja: typecheck, lint, format i UTF-8; ocena wyglądu pozostaje po stronie użytkownika.
+
 ### 2026-09-18 — M1-T2b / Dopasowanie do przesłanej wizualizacji
 
 - Porównano UI z dostarczonym obrazem: dodano geometryczne ikony nawigacji, ciemny przycisk Skanuj z bursztynowym obrysem, fioletowy napis terminów i bardziej zwarty nagłówek.

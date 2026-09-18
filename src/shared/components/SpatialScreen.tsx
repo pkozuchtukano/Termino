@@ -6,9 +6,10 @@ import {
   View,
   type StyleProp,
   type ViewStyle,
+  type TextStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { effects, tokens } from '@/shared/theme';
+import { effects, tokens, typography } from '@/shared/theme';
 export function SpatialScreen({
   title,
   children,
@@ -42,16 +43,22 @@ export function SpatialCard({
   children,
   style,
   centeredTitle = false,
+  titleStyle,
 }: PropsWithChildren<{
   title: string;
   style?: StyleProp<ViewStyle>;
   centeredTitle?: boolean;
+  titleStyle?: StyleProp<TextStyle>;
 }>) {
   return (
     <View style={[styles.card, style]}>
       <Text
         accessibilityRole="header"
-        style={[styles.cardTitle, centeredTitle && { textAlign: 'center' }]}
+        style={[
+          styles.cardTitle,
+          centeredTitle && { textAlign: 'center' },
+          titleStyle,
+        ]}
       >
         {title}
       </Text>
@@ -60,7 +67,7 @@ export function SpatialCard({
   );
 }
 export const spatialStyles = StyleSheet.create({
-  body: { color: tokens.colors.textSecondary, fontSize: 16, lineHeight: 24 },
+  body: { ...typography.cardBody, color: tokens.colors.textSecondary },
   row: { flexDirection: 'row', flexWrap: 'wrap', gap: 16 },
   tile: { flexGrow: 1, flexBasis: 140 },
   eyebrow: {
@@ -112,8 +119,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   cardTitle: {
+    ...typography.cardTitle,
     color: tokens.colors.textPrimary,
-    fontSize: 20,
-    fontWeight: '600',
   },
 });
