@@ -1,5 +1,11 @@
 # Zmiany projektu
 
+## Model domenowy
+
+### 2026-09-18 — M1-T3 / Dokument i terminy
+
+- Dodano model Document 1:N Deadline z datami date-only, konkretną akcją i statusem biznesowym terminu. Zaktualizowano architekturę i plan; bez persistencji i zmian UI. Typecheck i ESLint zmienionego pliku: OK. Szczegóły i ograniczenia: [docs/Zmiany.md](docs/Zmiany.md).
+
 ## Interfejs i Design System
 
 ### 2026-09-18 — M1-T2b / Poświata karty i typografia

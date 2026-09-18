@@ -10,8 +10,8 @@ Termino to aplikacja offline-first i serverless: podstawowa logika biznesowa dzi
 
 - M1-T1 — fundament: zakończony 2026-09-18; strict, lint, format, eksport Metro, build Android i ekran na emulatorze zweryfikowane.
 - M1-T2 — Navigation + Spatial App Shell: implementacja gotowa 2026-09-18; walidacje automatyczne wykonane, manualny smoke test nowego UI oczekuje na użytkownika. Styl: [DesignSystem.md](DesignSystem.md).
-- M1-T3 — model domenowy dokumentu: planowane.
-- M1-T4 — bootstrap WatermelonDB: planowane.
+- M1-T3 — model domenowy Document + Deadline: zakończony 2026-09-18 po walidacji typecheck i ESLint zmienionego pliku (0 ostrzeżeń). Bez testu UI.
+- Następny task: M1-T4 — WatermelonDB bootstrap; planowany, nierozpoczęty.
 - M1-T5 — pierwszy pionowy flow lokalnego dokumentu: planowane.
 - Później: import/zdjęcia, OCR, Notifee, Google Drive; Calendar jako osobna integracja zgodnie z ADR-013.
 
@@ -28,9 +28,9 @@ Planowany stos: React Native, TypeScript, Expo Custom Development Build / Dev Cl
 
 ## 3. Moduł 2 — cykl życia dokumentu
 
-- Dokumenty wielostronicowe, strony, kategorie jako osobne encje, tagi, daty wystawienia i ważności, kwoty oraz gwarancje.
+- Document z opcjonalną kategorią i datą zdarzenia źródłowego `eventDate`; wiele terminów Deadline z konkretną akcją `actionTitle` i datą `dueDate`. Strony, osobne encje kategorii i tagi to przyszłe rozszerzenia.
 - Edycja, przeglądanie, wyszukiwanie obejmujące OCRText i filtrowanie.
-- Kwoty: integer w najmniejszej jednostce waluty + osobny kod currency, np. PLN.
+- Kwota nie należy do rdzenia Termino; jeśli będzie potrzebna, trafi do opcjonalnych metadata.
 - Daty biznesowe: YYYY-MM-DD. Timestampy techniczne: UTC.
 
 ## 4. Moduł 3 — przypomnienia
@@ -60,15 +60,16 @@ Termin istnieje lokalnie niezależnie od synchronizacji. Google Calendar jest ad
 
 ## 7. Wstępny model danych
 
-To kierunek rozwoju, nie ostateczny schemat SQL; schemat i migracje powstaną w osobnym tasku.
+Model domenowy M1-T3 nie jest schematem SQL; baza i migracje powstaną w osobnym tasku.
 
 | Encja        | Planowana odpowiedzialność / pola                                                                                                |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| Document     | UUID, title, categoryId, issueDate, expiryDate, totalAmountMinor, currency, OCRText, status synchronizacji, createdAt, updatedAt |
-| DocumentPage | UUID, documentId, pageNumber, localPath, zewnętrzny identyfikator pliku Drive po synchronizacji                                  |
-| Category     | Osobna encja kategorii dokumentów                                                                                                |
-| Tag          | Osobna encja etykiety                                                                                                            |
-| DocumentTag  | Powiązanie dokumentu z tagiem                                                                                                    |
+| Document     | id, title, category?, eventDate?, sourceType, localFileUri?, createdAt, updatedAt |
+| Deadline     | id, documentId, actionTitle, dueDate, note?, status, completedAt?, createdAt, updatedAt |
+
+Document 1:N Deadline przez `documentId`. `eventDate` oznacza drugorzędną datę zdarzenia źródłowego. Rdzeń: `actionTitle` + `dueDate`. Daty biznesowe są date-only (`YYYY-MM-DD`), techniczne to timestampy UTC. Statusy: `active`, `completed`, `cancelled`; `overdue` i `urgent` będą wyliczane z daty terminu i bieżącej daty. `sourceType`: `camera | gallery | file | manual`; kategoria jest elastycznym tekstem/identyfikatorem.
+
+DocumentPage, Category, Tag i DocumentTag pozostają przyszłymi rozszerzeniami, poza M1-T3. Brak kwot, statusów OCR i synchronizacji w rdzeniu.
 
 Model musi umożliwić powiązania z przypomnieniami, Drive i Calendar. Każda przyszła zmiana bazy wymaga bezstratnej migracji; nie usuwamy zapisanych danych podczas aktualizacji.
 
@@ -76,8 +77,8 @@ Model musi umożliwić powiązania z przypomnieniami, Drive i Calendar. Każda p
 
 - **Dodanie:** skan → OCR → sugestie → korekta użytkownika → zapis lokalny → lokalne przypomnienia → opcjonalna synchronizacja Drive → opcjonalna synchronizacja Calendar. Przy błędzie OCR przejście do ręcznego wprowadzenia i zapisu.
 - **Wyszukiwanie:** fraza użytkownika → wyszukiwanie również w OCRText → otwarcie dokumentu i jego skanu/stron.
-- **Termin:** expiryDate → planowanie lokalnych przypomnień → opcjonalne utworzenie lub synchronizacja wydarzenia po włączeniu Google Calendar.
+- **Termin:** Deadline (`actionTitle` + `dueDate`) → planowanie lokalnych przypomnień → opcjonalne utworzenie lub synchronizacja wydarzenia po włączeniu Google Calendar.
 
 ## 9. Storage
 
-Pliki dokumentów trafiają do prywatnego storage aplikacji. Nie wymagamy MANAGE_EXTERNAL_STORAGE. Format docelowy (np. WebP/JPEG/PDF) zostanie zweryfikowany eksperymentalnie w osobnym tasku pipeline obrazu. Ścieżka pliku należy do strony dokumentu; nie zakładamy jednego LocalImagePath na dokument.
+Pliki dokumentów docelowo trafiają do prywatnego storage aplikacji. Nie wymagamy MANAGE_EXTERNAL_STORAGE. Format docelowy (np. WebP/JPEG/PDF) zostanie zweryfikowany eksperymentalnie w osobnym tasku pipeline obrazu. M1-T3 definiuje opcjonalne `Document.localFileUri`; obsługa wielu stron i ich ścieżek pozostaje przyszłym rozszerzeniem.

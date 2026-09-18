@@ -1,5 +1,14 @@
 # Zmiany
 
+## Model domenowy
+
+### 2026-09-18 — M1-T3 / Dokument i terminy
+
+- Dodano czyste typy Document i Deadline w `src/features/documents/domain/types.ts`: relacja 1:N przez `documentId`, rdzeń `actionTitle` + `dueDate`, drugorzędne `eventDate`, elastyczna kategoria i opcjonalny plik lokalny.
+- Daty biznesowe: date-only `YYYY-MM-DD`; techniczne: timestampy ISO 8601 UTC. Statusy: `active`, `completed`, `cancelled`; `overdue`/`urgent` będą wyliczane. Źródła: `camera`, `gallery`, `file`, `manual`.
+- Uaktualniono architekturę i plan; M1-T4 jest następny i pozostaje nierozpoczęty. Bez bazy, UI, kwot, integracji i nowych zależności.
+- Walidacja: typecheck i ESLint nowego pliku (0 ostrzeżeń) — OK. Aliasy dat nie zapewniają walidacji runtime; reguły przejść statusów poza zakresem. Bez emulatora i manualnego testu UI.
+
 ## Interfejs i Design System
 
 ### 2026-09-18 — M1-T2b / Poświata karty i typografia

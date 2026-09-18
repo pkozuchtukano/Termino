@@ -1,6 +1,15 @@
 # Termino — architektura i decyzje
 
-## Stan M1-T2
+## Model domenowy — M1-T3
+
+- Czyste typy w `src/features/documents/domain/types.ts`, bez zależności od UI, platformy, bazy i SDK. Relacja **Document 1:N Deadline** przez `Deadline.documentId` wskazujące `Document.id`.
+- Rdzeń Termino to **Deadline.actionTitle + Deadline.dueDate**: konkretna akcja i jej termin. `Document.eventDate` to drugorzędna data zdarzenia źródłowego, np. zakupu, wystawienia faktury lub podpisania umowy.
+- `eventDate` i `dueDate`: lekki alias `DateOnly` (`string`, format `YYYY-MM-DD`, bez czasu i timezone). `createdAt`, `updatedAt`, `completedAt`: `Timestamp` (`string`, ISO 8601 w UTC). Aliasy nie walidują wartości w runtime.
+- Status terminu: wyłącznie `active`, `completed`, `cancelled`; `completedAt` jest opcjonalne. `overdue` i `urgent` będą wyliczane z `dueDate` i bieżącej daty, nie przechowywane. Reguły przejść statusów i próg pilności pozostają poza M1-T3.
+- `sourceType`: `camera | gallery | file | manual`. `category?: string` jest elastyczną wartością/identyfikatorem; `localFileUri?: string` wskazuje opcjonalny plik lokalny.
+- M1-T3 aktualizuje zakres ADR-005/008/009 poniżej: strony i osobna encja kategorii pozostają kierunkiem przyszłego rozwoju; aktualny model ma opcjonalne `localFileUri` i `category`. Kwota nie należy do rdzenia — ewentualnie trafi do opcjonalnych metadata. Nie dodano tych rozszerzeń ani persistencji.
+
+## Fundament i nawigacja — stan M1-T2
 
 Wdrożone: React Native 0.86.3, React 19.2.3, Expo 57 / Dev Client, TypeScript strict, React Navigation 7, npm z lockfile, ESLint i Prettier. Trzy ekrany renderują lokalne placeholdery; brak store, bazy i wywołań sieciowych aplikacji. Metro/Babel korzystają z domyślnych ustawień Expo; brak test runnera.
 
@@ -31,7 +40,7 @@ Status poniższych ADR: **zaakceptowane**, data: **2026-09-18**. Decyzje opisuj�
 ## Organizacja kodu — M1-T2
 
 - `index.ts`: `registerRootComponent` Expo; `src/core/App.tsx`: providery; `src/core/navigation`: Root Stack, Main App Shell i typy.
-- Feature-first: `documents`, `add-document`, `settings` zawierają po jednym ekranie; `shared/components/SpatialScreen` i `SpatialCard` są używane przez wszystkie trzy. Typowane tokeny i motyw nawigacji: `shared/theme`; zasady UI: [DesignSystem.md](DesignSystem.md). Usunięto nieużywany `home`. Bez pustych warstw repozytoriów, domeny lub usług.
+- Feature-first: `documents`, `add-document`, `settings` zawierają po jednym ekranie; od M1-T3 `documents/domain/types.ts` zawiera model dokumentu i terminów. `shared/components/SpatialScreen` i `SpatialCard` są używane przez wszystkie trzy. Typowane tokeny i motyw nawigacji: `shared/theme`; zasady UI: [DesignSystem.md](DesignSystem.md). Usunięto nieużywany `home`. Bez pustych warstw repozytoriów, domeny lub usług.
 - Alias `@/*` → `src/*` jest zdefiniowany w `tsconfig.json` i używany w entry oraz App. Expo Metro natywnie odczytuje `paths`; nie dodajemy resolvera Babel ani `baseUrl`. Po zmianie aliasów należy zrestartować Metro.
 - UI wywołuje przypadki użycia; domena nie importuje SDK integracji. Adaptery realizują kontrakty wymagane przez domenę/przypadki użycia.
 - Native `android/` generuje Expo Prebuild (CNG); nie wersjonujemy go. Trwałe zmiany natywne zapisujemy w konfiguracji Expo/pluginach.
