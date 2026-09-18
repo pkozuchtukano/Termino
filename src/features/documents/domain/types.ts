@@ -22,13 +22,23 @@ export type Document = {
 /** Overdue and urgent are derived from dueDate and the current date, not stored. */
 export type DeadlineStatus = 'active' | 'completed' | 'cancelled';
 
+export type RecurrenceFrequency = 'daily' | 'weekly' | 'monthly' | 'yearly';
+
+export type RecurrenceRule = {
+  frequency: RecurrenceFrequency;
+  /** Positive integer: e.g. 3 with monthly means every 3 months. No runtime validation. */
+  interval: number;
+};
+
 export type Deadline = {
   id: string;
-  /** References Document.id; one document can have multiple deadlines. */
-  documentId: string;
+  /** Optional Document.id reference; a document can have zero or more deadlines. */
+  documentId?: string;
   actionTitle: string;
+  /** Base date or date of the current occurrence; no next-occurrence generation. */
   dueDate: DateOnly;
   note?: string;
+  recurrence?: RecurrenceRule;
   status: DeadlineStatus;
   completedAt?: Timestamp;
   createdAt: Timestamp;

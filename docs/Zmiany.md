@@ -2,6 +2,13 @@
 
 ## Model domenowy
 
+### 2026-09-18 — M1-T3a / Samodzielne i powtarzalne terminy
+
+- `Deadline.documentId` jest opcjonalne: dokument ma 0..N terminów, termin wskazuje 0..1 dokument. Dodano opcjonalne `recurrence` z `frequency` (daily/weekly/monthly/yearly) i `interval`; `dueDate` oznacza datę bazową/aktualnego wystąpienia.
+- Uaktualniono architekturę, plan i Design System: ręczne dodawanie jest równorzędne wobec skanowania; docelowe „+ Dodaj” oferuje „Dodaj termin ręcznie” / „Skanuj dokument”. Bez implementacji UI, persistencji, walidacji runtime i generatora powtórzeń. M1-T4 pozostaje następny, nierozpoczęty.
+- Usunięto rootowy `Zmiany.md`, który powielał wpisy i odsyłał tutaj; nie znaleziono zależności w wersjonowanych skryptach ani konfiguracji. Ten plik jest jedynym źródłem prawdy dla zmian; decyzja zastępuje wcześniejszy wymóg utrzymywania rootowego indeksu.
+- Walidacja: typecheck, ESLint zmienionego pliku, `git diff --check` i kontrola UTF-8. Bez builda, emulatora i testów UI.
+
 ### 2026-09-18 — M1-T3 / Dokument i terminy
 
 - Dodano czyste typy Document i Deadline w `src/features/documents/domain/types.ts`: relacja 1:N przez `documentId`, rdzeń `actionTitle` + `dueDate`, drugorzędne `eventDate`, elastyczna kategoria i opcjonalny plik lokalny.

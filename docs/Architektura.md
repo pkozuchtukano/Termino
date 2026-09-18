@@ -1,8 +1,10 @@
 # Termino — architektura i decyzje
 
-## Model domenowy — M1-T3
+## Model domenowy — M1-T3 / M1-T3a
 
-- Czyste typy w `src/features/documents/domain/types.ts`, bez zależności od UI, platformy, bazy i SDK. Relacja **Document 1:N Deadline** przez `Deadline.documentId` wskazujące `Document.id`.
+- Czyste typy w `src/features/documents/domain/types.ts`, bez zależności od UI, platformy, bazy i SDK. **Document ma 0..N Deadline**, a **Deadline wskazuje 0..1 Document** przez opcjonalne `documentId`. Termin jest podstawową jednostką i może istnieć bez dokumentu.
+- Ręczne dodawanie terminu jest równorzędnym flow względem skanowania; dokument i skan nie są wymagane. Minimum: `id`, `actionTitle`, `dueDate`, `status`, `createdAt`, `updatedAt`; opcjonalnie `note`, `recurrence` i powiązanie dokumentu.
+- Opcjonalne `recurrence: RecurrenceRule` zawiera `frequency: daily | weekly | monthly | yearly` oraz `interval: number` (dodatnia liczba całkowita, np. monthly + 3 = co 3 miesiące). `dueDate` jest datą bazową/aktualnego wystąpienia. Bez walidacji runtime, RRULE, dni tygodnia, wyjątków, daty końcowej ani generowania kolejnych terminów po wykonaniu.
 - Rdzeń Termino to **Deadline.actionTitle + Deadline.dueDate**: konkretna akcja i jej termin. `Document.eventDate` to drugorzędna data zdarzenia źródłowego, np. zakupu, wystawienia faktury lub podpisania umowy.
 - `eventDate` i `dueDate`: lekki alias `DateOnly` (`string`, format `YYYY-MM-DD`, bez czasu i timezone). `createdAt`, `updatedAt`, `completedAt`: `Timestamp` (`string`, ISO 8601 w UTC). Aliasy nie walidują wartości w runtime.
 - Status terminu: wyłącznie `active`, `completed`, `cancelled`; `completedAt` jest opcjonalne. `overdue` i `urgent` będą wyliczane z `dueDate` i bieżącej daty, nie przechowywane. Reguły przejść statusów i próg pilności pozostają poza M1-T3.

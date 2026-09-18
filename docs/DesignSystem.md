@@ -12,7 +12,7 @@ Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów
 | border          | rgba(255,255,255,0.14) | Cienkie obramowania                 |
 | textPrimary     | #F5F7FA                | Nagłówki i główna treść             |
 | textSecondary   | #8F98A8                | Opisy i niedostępność               |
-| amber           | #F5A623                | Skanuj                              |
+| amber           | #F5A623                | Centralne CTA „+ Dodaj”              |
 | cyan            | #25E6E6                | Aktywny tab, akcenty i CTA sugestii |
 | violet          | #7267FF                | Poświata terminów                   |
 | violetTint      | rgba(114,103,255,0.12) | Tło terminów                        |
@@ -20,7 +20,7 @@ Ten dokument jest źródłem prawdy dla wyglądu Termino. Implementacja tokenów
 | cyanTint        | rgba(37,230,230,0.10)  | Nieaktywne CTA                      |
 | cyanBorder      | rgba(37,230,230,0.65)  | Obramowanie nieaktywnego CTA        |
 
-Dodatkowe tokeny: amberTint = #241E15 (ciemne wypełnienie Skanuj), violetText = #A69FFF (czytelny fioletowy tekst i narożniki), scannerSurface = #0D1117 (ciemny podgląd).
+Dodatkowe tokeny: amberTint = #241E15 (ciemne wypełnienie centralnego CTA), violetText = #A69FFF (czytelny fioletowy tekst i narożniki), scannerSurface = #0D1117 (ciemny podgląd).
 
 Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRadius = 24; microCardRadius = 18; primaryCtaRadius = 30; touchTarget = 48. Kolory komponentów pochodzą wyłącznie z tokenów. Systemowa typografia w typowanych tokenach typography: opisy 15/23, waga 400, tracking 0.3; nagłówki kart 21, waga 500, tracking 0.2; tytuł terminów 23, waga 600; główny stan 38, waga 700, tracking -0.8. Android korzysta z sans-serif / sans-serif-medium, iOS z System. Marka 22, podpis ekranu 14. Nie identyfikujemy kroju z ilustracji jako konkretnej rodziny fontu. Tekst może się skalować i zawijać.
 
@@ -34,9 +34,15 @@ Typowane tokeny: spacing xs/sm/md/lg/xl/xxl/section = 4/8/12/16/20/24/32; cardRa
 
 ## Bottom navigation
 
-Dokumenty / Skanuj / Ustawienia. Zaokrąglony kontener surfaceElevated z obramowaniem, margines boczny 16 plus Safe Area, szerokość maksymalna 720. Dolny odstęp to większa z wartości: inset i 12. Pasek zajmuje własne miejsce w layoucie, więc nie zasłania przewijanej treści; pływający efekt tworzą odsunięcie od krawędzi i cień.
+Docelowy kontrakt M1-T3a: **Dokumenty | + Dodaj | Ustawienia**. „+ Dodaj” otworzy wybór: **Dodaj termin ręcznie** / **Skanuj dokument**. Ręczne dodawanie jest równorzędne wobec skanowania; skanowanie to opcjonalny sposób utworzenia terminu. Zmiana jest wyłącznie dokumentacyjna — obecny UI nadal pokazuje „Skanuj”.
 
-Skanuj: ciemne wypełnienie amberTint, bursztynowa ikona aparatu, tekst i obrys, promień 24, minimalna wysokość 84, maksymalna szerokość 116. Dekoracyjne tło paska zaczyna się 22 punkty poniżej górnej krawędzi kontenera; przycisk pozostaje w całości wewnątrz obszaru dotyku rodzica. Ikony Dokumentów i Ustawień są geometryczne, bez nowych zależności. Otwiera osobny ekran stosu, nie trzeci tab. Aktywny tab ma cyan i semantyczny stan selected. Android Back obsługuje istniejący React Navigation.
+Zaokrąglony kontener surfaceElevated z obramowaniem, margines boczny 16 plus Safe Area, szerokość maksymalna 720. Dolny odstęp to większa z wartości: inset i 12. Pasek zajmuje własne miejsce w layoucie, więc nie zasłania przewijanej treści; pływający efekt tworzą odsunięcie od krawędzi i cień.
+
+Centralne CTA „+ Dodaj”: ciemne wypełnienie amberTint, bursztynowy tekst i obrys, promień 24, minimalna wysokość 84, maksymalna szerokość 116. Dekoracyjne tło paska zaczyna się 22 punkty poniżej górnej krawędzi kontenera; przycisk pozostaje w całości wewnątrz obszaru dotyku rodzica. Ikony Dokumentów i Ustawień są geometryczne, bez nowych zależności. Docelowo otwiera wybór sposobu dodania ponad tabami, nie trzeci tab. Aktywny tab ma cyan i semantyczny stan selected. Android Back obsługuje istniejący React Navigation.
+
+## Ręczne dodawanie terminu — planowane
+
+Formularz: **Co zrobić?**, **Termin**, **Powtarzanie (opcjonalne)**, **Notatka (opcjonalna)**. Dokument nie jest wymagany. Powtarzanie opisuje częstotliwość i interwał; data terminu dotyczy bazowego/aktualnego wystąpienia. M1-T3a nie implementuje formularza, wyboru sposobu dodania ani logiki kolejnych wystąpień.
 
 ## Deadline widget
 
