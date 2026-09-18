@@ -10,7 +10,7 @@ import type {
 } from '@/core/navigation/types';
 import { DocumentsScreen } from '@/features/documents/DocumentsScreen';
 import { SettingsScreen } from '@/features/settings/SettingsScreen';
-import { tokens } from '@/shared/theme';
+import { effects, tokens } from '@/shared/theme';
 const Tabs = createBottomTabNavigator<MainTabParamList>();
 function ShellBar({
   state,
@@ -51,24 +51,26 @@ function ShellBar({
   return (
     <View
       style={[
-        styles.bar,
+        styles.barArea,
         {
-          paddingBottom: Math.max(insets.bottom, 12),
-          paddingLeft: Math.max(insets.left, 8),
-          paddingRight: Math.max(insets.right, 8),
+          paddingBottom: Math.max(insets.bottom, tokens.spacing.md),
+          paddingLeft: insets.left + tokens.spacing.lg,
+          paddingRight: insets.right + tokens.spacing.lg,
         },
       ]}
     >
-      {section(0)}
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="Skanuj — dodaj dokument"
-        onPress={onScan}
-        style={({ pressed }) => [styles.scan, pressed && styles.pressed]}
-      >
-        <Text style={styles.scanLabel}>Skanuj</Text>
-      </Pressable>
-      {section(1)}
+      <View style={styles.bar}>
+        {section(0)}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Skanuj — dodaj dokument"
+          onPress={onScan}
+          style={({ pressed }) => [styles.scan, pressed && styles.pressed]}
+        >
+          <Text style={styles.scanLabel}>Skanuj</Text>
+        </Pressable>
+        {section(1)}
+      </View>
     </View>
   );
 }
@@ -100,14 +102,20 @@ export function MainAppShell({
   );
 }
 const styles = StyleSheet.create({
+  barArea: { backgroundColor: tokens.colors.background, paddingTop: 16 },
   bar: {
+    ...effects.card,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    paddingTop: 12,
-    backgroundColor: tokens.colors.surface,
-    borderTopWidth: 1,
-    borderTopColor: tokens.colors.border,
+    padding: 8,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
+    borderRadius: tokens.primaryCtaRadius,
+    backgroundColor: tokens.colors.surfaceElevated,
+    borderWidth: 1,
+    borderColor: tokens.colors.border,
   },
   tab: {
     flex: 1,
@@ -122,23 +130,20 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'center',
   },
-  selected: { color: tokens.colors.textPrimary, fontWeight: '700' },
+  selected: { color: tokens.colors.cyan, fontWeight: '700' },
   scan: {
+    ...effects.amber,
     flex: 1.15,
     minHeight: 60,
     borderRadius: tokens.primaryCtaRadius,
-    backgroundColor: tokens.colors.primary,
+    backgroundColor: tokens.colors.amber,
+    marginTop: -24,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 12,
-    elevation: 4,
-    shadowColor: tokens.colors.primary,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
   },
   scanLabel: {
-    color: tokens.colors.textPrimary,
+    color: tokens.colors.background,
     fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',

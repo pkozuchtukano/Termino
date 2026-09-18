@@ -17,7 +17,7 @@ export function RootNavigator() {
       <Stack.Screen
         name="AddDocument"
         component={AddDocumentScreen}
-        options={{ title: 'Dodaj dokument' }}
+        options={{ title: 'Skanowanie i OCR', headerBackTitle: 'Wstecz' }}
       />
     </Stack.Navigator>
   );

@@ -1,5 +1,11 @@
 # Zmiany projektu
 
+## Interfejs i Design System
+
+### 2026-09-18 — M1-T2b / Reference UI Alignment
+
+Dopasowano dashboard, nawigację, ustawienia i ekran Skanowanie i OCR do Dark Spatial UI. Ujednolicono tokeny i polskie etykiety; funkcje przyszłe są jawnie niedostępne. Zaktualizowano DesignSystem.md. Szczegóły i walidacja: [docs/Zmiany.md](docs/Zmiany.md).
+
 ## Fundament aplikacji
 
 ### 2026-09-18 — Korekta nazwy produktu na Termino

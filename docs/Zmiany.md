@@ -1,5 +1,14 @@
 # Zmiany
 
+## Interfejs i Design System
+
+### 2026-09-18 — M1-T2b / Reference UI Alignment
+
+- Dopasowano paletę Dark Spatial UI, typowane tokeny i efekty; dashboard ma pusty violet widget i karty Bento. Pływający pasek zawiera amber Skanuj i cyan aktywny tab. Zachowano istniejącą nawigację.
+- Ustawienia pokazują jawnie niedostępne funkcje. Skanowanie i OCR ma podgląd z narożnikami, pola Data/Kwota/Kategoria i zablokowane zatwierdzanie. Wszystkie teksty po polsku, bez fikcyjnych danych i nowych zależności.
+- DesignSystem.md opisuje tokeny, layout, accessibility, efekty oraz zakres wdrożony i przyszły. Bez zmian bazy i danych.
+- Walidacja: typecheck, ESLint (0 ostrzeżeń), Prettier, kontrola diffu i UTF-8 — OK. Bez emulatora, pełnych testów i operacji remote. Referencję stanowi opis użytkownika; ocena wizualna i Safe Area wymagają jego smoke testu.
+
 Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i opatrujemy datą, tytułem, opisem oraz skutkiem.
 
 ## Fundament aplikacji
