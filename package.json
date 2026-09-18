@@ -1,22 +1,32 @@
 {
-  "name": "terminio",
-  "version": "1.0.0",
+  "name": "termino",
+  "version": "0.1.0",
   "main": "index.ts",
   "dependencies": {
     "expo": "~57.0.24",
-    "expo-status-bar": "~57.0.1",
+    "expo-dev-client": "~57.0.19",
     "react": "19.2.3",
     "react-native": "0.86.3"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "~57.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.8",
     "typescript": "~6.0.3"
   },
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "expo start --dev-client",
+    "android": "expo run:android --device",
+    "build:android:js": "expo export --platform android",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "engines": {
+    "node": ">=22.13.0"
   },
   "private": true
 }
