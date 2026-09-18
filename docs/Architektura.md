@@ -1,8 +1,12 @@
 # Terminie — architektura i decyzje
 
-## Stan M1-T1
+## Stan M1-T2
 
-Wdrożone: React Native 0.86.3, React 19.2.3, Expo 57 / Dev Client, TypeScript strict, npm z lockfile, ESLint i Prettier. Ekran „Terminie / Projekt gotowy” renderuje wyłącznie lokalny tekst. Brak nawigacji, store, bazy i wywołań sieciowych aplikacji. Metro/Babel korzystają z domyślnych ustawień Expo; brak test runnera.
+Wdrożone: React Native 0.86.3, React 19.2.3, Expo 57 / Dev Client, TypeScript strict, React Navigation 7, npm z lockfile, ESLint i Prettier. Trzy ekrany renderują lokalne placeholdery; brak store, bazy i wywołań sieciowych aplikacji. Metro/Babel korzystają z domyślnych ustawień Expo; brak test runnera.
+
+Root Stack (`native-stack`): `Main` → Main App Shell oraz osobne `AddDocument`. Shell (`bottom-tabs`) ma sekcje `Documents` i `Settings`, z widocznymi etykietami „Dokumenty” i „Ustawienia”. Przycisk „Dodaj” w nagłówku każdej sekcji otwiera flow dodawania ponad tabami; Android Back zdejmuje tę trasę i przywraca sekcję. Brak dodatkowych kroków flow. Start: `Main/Documents`; brak persistencji nawigacji i konfiguracji deep linków.
+
+Typy tras: `src/core/navigation/types.ts`. `SafeAreaProvider` otacza kontener nawigacji; navigatory obsługują insets nagłówków/paska, wspólny `PlaceholderScreen` chroni treść przy krawędziach. Nie dodano biblioteki ikon. Android z Expo już odrzuca odtwarzanie stanu Activity (`super.onCreate(null)`); nowe natywne moduły podłącza autolinking, wymagany rebuild Dev Client.
 
 Planowane: WatermelonDB / SQLite, ML Kit OCR, Notifee, Google Drive API i opcjonalna integracja Google Calendar zgodnie z bazowym planem. Nie są zainstalowane ani zaimplementowane. Offline-first: przyszłe dane trwałe i reguły biznesowe działają lokalnie, integracje nie blokują operacji. Dev Client potrzebuje lokalnego Metro do pobrania kodu; nie jest samodzielnym buildem produkcyjnym.
 
@@ -24,10 +28,10 @@ Status poniższych ADR: **zaakceptowane**, data: **2026-09-18**. Decyzje opisuj�
 | ADR-012 | Notifee obsługuje lokalne przypomnienia; Google Calendar jest opcjonalną integracją kalendarza. Żaden nie jest źródłem prawdy dla terminu dokumentu.                                |
 | ADR-013 | Google Calendar należy do MVP; osobny moduł po utworzeniu stabilnego modelu domenowego.                                                                                             |
 
-## Organizacja kodu — M1-T1
+## Organizacja kodu — M1-T2
 
-- `index.ts`: `registerRootComponent` Expo; `src/core/App.tsx`: składanie aplikacji; `src/features/home/HomeScreen.tsx`: obecny ekran.
-- Feature-first: kod konkretnej funkcjonalności trafia do `src/features/<feature>`. `documents` i `settings` powstaną dopiero przy ich implementacji. `core` zawiera inicjalizację i przyszłą konfigurację aplikacji; `shared` powstanie dla faktycznie współdzielonych elementów, bez zależności od feature'ów. Nie tworzymy pustych katalogów ani warstw na zapas.
+- `index.ts`: `registerRootComponent` Expo; `src/core/App.tsx`: providery; `src/core/navigation`: Root Stack, Main App Shell i typy.
+- Feature-first: `documents`, `add-document`, `settings` zawierają po jednym ekranie; `shared/components/PlaceholderScreen` jest używany przez wszystkie trzy. Usunięto nieużywany `home`. Bez pustych warstw repozytoriów, domeny lub usług.
 - Alias `@/*` → `src/*` jest zdefiniowany w `tsconfig.json` i używany w entry oraz App. Expo Metro natywnie odczytuje `paths`; nie dodajemy resolvera Babel ani `baseUrl`. Po zmianie aliasów należy zrestartować Metro.
 - UI wywołuje przypadki użycia; domena nie importuje SDK integracji. Adaptery realizują kontrakty wymagane przez domenę/przypadki użycia.
 - Native `android/` generuje Expo Prebuild (CNG); nie wersjonujemy go. Trwałe zmiany natywne zapisujemy w konfiguracji Expo/pluginach.

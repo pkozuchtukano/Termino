@@ -4,6 +4,16 @@ Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i op
 
 ## Fundament aplikacji
 
+### 2026-09-18 — M1-T2 / Navigation + App Shell
+
+- Dodano typowany Root Stack (`Main`, `AddDocument`) i standardowe dolne taby Dokumenty/Ustawienia. Akcja „Dodaj” w nagłówku otwiera osobny ekran ponad shellem; Back wraca do poprzedniej sekcji. Świeży start otwiera Dokumenty, bez persistencji i deep linków aplikacji.
+- Zastąpiono `home` feature'ami `documents`, `settings`, `add-document`; wspólny `PlaceholderScreen` i Safe Area obsługują lokalne teksty. Bez logiki biznesowej i nowych uprawnień.
+- Zależności: `@react-navigation/native` 7.4.1 (kontener), `native-stack` 7.19.2 (Root Stack), `bottom-tabs` 7.19.2 (shell), `react-native-screens` 4.26.2 (natywne ekrany), `react-native-safe-area-context` 5.7.0 (insets). Wersje natywne dobrane przez Expo; wymagany rebuild Dev Client, autolinking bez dodatkowych zmian entry/Metro/Babel. Nie usunięto zależności.
+- Typecheck, ESLint, eksport Metro Android i `expo install --check`: OK. Natywny `assembleDebug` x86_64 oraz instalacja na `Termino_API_36` (API 36): OK. Nie dodano test runnera.
+- Smoke przez UI Automator: Dokumenty → Ustawienia → Dokumenty → Dodaj → Android Back; także Dodaj/Back z Ustawień: OK. Powtórzono bez Wi-Fi i danych komórkowych, z lokalnym ADB do Metro; świeży start otwiera Dokumenty. Brak błędów ReactNativeJS/AndroidRuntime. Prettier i kontrola UTF-8: OK.
+- Dev Client może długo ładować ekran po restarcie; test czeka na rzeczywistą hierarchię UI. Pływający przycisk narzędzi Expo może zasłaniać część akcji „Dodaj” w buildzie developerskim; nie jest elementem App Shell.
+- Ograniczenia: test natywny obejmuje emulator x86_64, nie fizyczny telefon ani build release. Dev Client pobiera JS z lokalnego Metro. Pozostają ostrzeżenia deprecacji zależności natywnych oraz wcześniejsze 10 zgłoszeń npm audit moderate w narzędziach Expo; bez wymuszonej aktualizacji poza zakresem.
+
 ### 2026-09-18 — M1-T1 / Feature-first i alias źródeł
 
 - Przeniesiono App do `src/core`, ekran do `src/features/home`; usunięto poprzednie katalogi. Przyszłe `documents`, `settings` i `shared` opisano bez pustych placeholderów.

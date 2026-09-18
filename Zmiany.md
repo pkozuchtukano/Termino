@@ -2,6 +2,10 @@
 
 ## Fundament aplikacji
 
+### 2026-09-18 — M1-T2 / Navigation + App Shell
+
+Dodano React Navigation: dolne sekcje Dokumenty/Ustawienia i osobny flow Dodaj dokument uruchamiany z nagłówka. Typowane trasy, Safe Area i trzy lokalne placeholdery zastąpiły feature `home`. Szczegóły zależności, walidacji i ograniczeń: [docs/Zmiany.md](docs/Zmiany.md).
+
 ### 2026-09-18 — M1-T1 / Feature-first i alias importów
 
 Przeniesiono składanie aplikacji do `src/core`, ekran do `src/features/home`, dodano używany alias `@/*` i tekst „Terminie / Projekt gotowy”. Zachowano strict oraz zależności. Typecheck, lint, bundlowanie i build Android przeszły; zweryfikowano ekran na emulatorze. Pełny wpis i ograniczenia: [docs/Zmiany.md](docs/Zmiany.md).

@@ -1,6 +1,6 @@
 # Terminie
 
-Terminie to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. Obecny fundament zawiera wyłącznie lokalny ekran startowy; MVP jest przeznaczone na Androida.
+Terminie to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. Obecny szkielet zawiera lokalne ekrany Dokumenty, Ustawienia i Dodaj dokument; MVP jest przeznaczone na Androida.
 
 ## Wymagania
 
@@ -42,7 +42,7 @@ Polecenie generuje projekt natywny, buduje i instaluje Dev Client oraz uruchamia
 npm start
 ```
 
-Naciśnij `a`, aby otworzyć aplikację na Androidzie. Oczekiwany ekran: „Terminie” / „Projekt gotowy”. Po zmianach modułów natywnych ponownie wykonaj `npm run android`. Po zmianach aliasów w `tsconfig.json` zrestartuj Metro. Szczegóły struktury i decyzji znajdują się w `/docs`.
+Naciśnij `a`, aby otworzyć aplikację na Androidzie. Start: „Dokumenty”; dolny pasek przełącza Dokumenty/Ustawienia, przycisk „Dodaj” otwiera osobny ekran, systemowy Back wraca do sekcji. Po instalacji zależności M1-T2 wymagany jest rebuild przez `npm run android`. Po zmianach aliasów w `tsconfig.json` zrestartuj Metro. Szczegóły struktury i decyzji znajdują się w `/docs`.
 
 ## Jakość
 
