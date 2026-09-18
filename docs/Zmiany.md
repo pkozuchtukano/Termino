@@ -4,6 +4,13 @@ Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i op
 
 ## Fundament aplikacji
 
+### 2026-09-18 — M1-T2 / Spatial App Shell
+
+- Zachowano React Navigation i typowany Root Stack; centralne Skanuj otwiera AddDocument ponad dwiema sekcjami. Akcja nie jest tabem. Start: Dokumenty; bez persistencji/deep linków.
+- Dodano typowane tokeny, ciemny motyw, puste karty bento, placeholder Ustawień i ilustrację przyszłego skanowania. Wspólne SpatialScreen/SpatialCard zastępują martwy PlaceholderScreen; home już wcześniej usunięty. Safe Area, przewijanie i elastyczne szerokości.
+- Dodano DesignSystem.md z rozdzieleniem wdrożonych i planowanych elementów. Brak nowych zależności, zmian konfiguracji, danych fikcyjnych i logiki biznesowej.
+- Walidacja: typecheck, lint, Prettier, UTF-8 i diff. Bez builda (zależności/config bez zmian), bez uruchamiania emulatora i bez manualnego UI. Layout, Back i offline pozostają do sprawdzenia przez użytkownika; historyczny smoke poprzedniej wersji nie potwierdza nowego UI.
+
 ### 2026-09-18 — Workflow tasków / terminie-task-workflow
 
 - Dodano projektowy skill w `.agents/skills/terminie-task-workflow/SKILL.md`: punktowe odczyty, hermetyczny zakres, automatyczna walidacja, lokalny commit i tekst PR bez publikacji.

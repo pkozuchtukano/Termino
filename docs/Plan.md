@@ -9,7 +9,7 @@ Terminie to aplikacja offline-first i serverless: podstawowa logika biznesowa dz
 ## Kolejność prac
 
 - M1-T1 — fundament: zakończony 2026-09-18; strict, lint, format, eksport Metro, build Android i ekran na emulatorze zweryfikowane.
-- M1-T2 — nawigacja i App Shell: zakończony 2026-09-18; walidacje statyczne, bundle, build Android oraz flow i Back na emulatorze offline zweryfikowane.
+- M1-T2 — Navigation + Spatial App Shell: implementacja gotowa 2026-09-18; walidacje automatyczne wykonane, manualny smoke test nowego UI oczekuje na użytkownika. Styl: [DesignSystem.md](DesignSystem.md).
 - M1-T3 — model domenowy dokumentu: planowane.
 - M1-T4 — bootstrap WatermelonDB: planowane.
 - M1-T5 — pierwszy pionowy flow lokalnego dokumentu: planowane.

@@ -2,6 +2,10 @@
 
 ## Fundament aplikacji
 
+### 2026-09-18 — M1-T2 / Spatial App Shell
+
+Dodano ciemny dashboard, tokeny i centralne Skanuj otwierające osobny flow. Bez zmian zależności; manualny smoke test wykonuje użytkownik. Szczegóły: [docs/Zmiany.md](docs/Zmiany.md).
+
 ### 2026-09-18 — Workflow tasków
 
 Dodano skill `terminie-task-workflow`, ograniczający odczyty i raporty oraz pozostawiający manualny smoke test użytkownikowi. Szczegóły: [docs/Zmiany.md](docs/Zmiany.md).
