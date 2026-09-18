@@ -1,10 +1,10 @@
-# Terminie — Plan produktu i architektury v0.1
+# Termino — Plan produktu i architektury v0.1
 
 Dokument jest planem bazowym, nie niezmiennym kontraktem. Kolejne decyzje mogą go modyfikować. Zaakceptowane zmiany architektoniczne zapisujemy w [Architektura.md](Architektura.md), a implementacyjne w [Zmiany.md](Zmiany.md). Każdy przyszły task aktualizuje dziennik zmian.
 
 ## 1. Architektura i stos
 
-Terminie to aplikacja offline-first i serverless: podstawowa logika biznesowa działa lokalnie na urządzeniu, bez własnego backendu. Android jest platformą MVP; iOS pozostaje poza bieżącym zakresem. Domena nie powinna zależeć od Androida.
+Termino to aplikacja offline-first i serverless: podstawowa logika biznesowa działa lokalnie na urządzeniu, bez własnego backendu. Android jest platformą MVP; iOS pozostaje poza bieżącym zakresem. Domena nie powinna zależeć od Androida.
 
 ## Kolejność prac
 

@@ -1,6 +1,6 @@
-# Terminie
+# Termino
 
-Terminie to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. Obecny szkielet zawiera lokalne ekrany Dokumenty, Ustawienia i Dodaj dokument; MVP jest przeznaczone na Androida.
+Termino to rozwijana aplikacja mobilna do dokumentów i terminów, projektowana offline-first. Obecny szkielet zawiera lokalne ekrany Dokumenty, Ustawienia i Dodaj dokument; MVP jest przeznaczone na Androida.
 
 ## Wymagania
 

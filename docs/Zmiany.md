@@ -4,6 +4,11 @@ Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i op
 
 ## Fundament aplikacji
 
+### 2026-09-18 — Korekta nazwy produktu na Termino
+
+- Ujednolicono nazwę na Termino w nagłówku UI, nazwie wyświetlanej Expo, README i dokumentacji. Identyfikatory techniczne oraz package name pozostają bez zmian.
+- Walidacja: kontrola diffu i UTF-8; zmiana wyłącznie tekstowa, bez builda i testów aplikacji.
+
 ### 2026-09-18 — M1-T2 / Spatial App Shell
 
 - Zachowano React Navigation i typowany Root Stack; centralne Skanuj otwiera AddDocument ponad dwiema sekcjami. Akcja nie jest tabem. Start: Dokumenty; bez persistencji/deep linków.
@@ -31,7 +36,7 @@ Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i op
 
 - Przeniesiono App do `src/core`, ekran do `src/features/home`; usunięto poprzednie katalogi. Przyszłe `documents`, `settings` i `shared` opisano bez pustych placeholderów.
 - Zachowano entry Expo, TypeScript strict i istniejące narzędzia; dodano `@/*` → `src/*` w tsconfig i wykorzystano alias w obu importach. Metro odczytuje paths bez konfiguracji Babel i dodatkowych zależności.
-- Ekran pokazuje „Terminie / Projekt gotowy”; zmieniono nazwę wyświetlaną Expo. Slug, pakiet npm i applicationId zachowane. Brak zmian danych, nawigacji, store i modułów natywnych/domenowych; zależności bez zmian.
+- Ekran pokazuje „Termino / Projekt gotowy”; zmieniono nazwę wyświetlaną Expo. Slug, pakiet npm i applicationId zachowane. Brak zmian danych, nawigacji, store i modułów natywnych/domenowych; zależności bez zmian.
 - Uzupełniono architekturę, kolejność M1-T1–M1-T5 i README; szczegółowa dokumentacja pozostaje w `/docs`, główny `Zmiany.md` jest wymaganym indeksem.
 - Walidacja: typecheck, lint, Prettier, eksport bundla Android z `EXPO_OFFLINE=1`, natywny `assembleDebug` x86_64 i instalacja: OK. Ekran na AVD `Termino_API_36` potwierdzony przez UI Automator. Brak istniejącego test runnera; nie dodawano sztucznych testów.
 - Smoke offline: ponownie uruchomiono ekran przy wyłączonych Wi-Fi i danych komórkowych emulatora, zachowując lokalne połączenie ADB z Metro; oba teksty potwierdzone. Przywrócono ustawienia sieci. Kontrola UTF-8 i diff: OK.

@@ -1,4 +1,4 @@
-# Terminie — architektura i decyzje
+# Termino — architektura i decyzje
 
 ## Stan M1-T2
 
@@ -36,7 +36,7 @@ Status poniższych ADR: **zaakceptowane**, data: **2026-09-18**. Decyzje opisuj�
 - UI wywołuje przypadki użycia; domena nie importuje SDK integracji. Adaptery realizują kontrakty wymagane przez domenę/przypadki użycia.
 - Native `android/` generuje Expo Prebuild (CNG); nie wersjonujemy go. Trwałe zmiany natywne zapisujemy w konfiguracji Expo/pluginach.
 - `com.termino.app` to roboczy identyfikator lokalnego development buildu, do zatwierdzenia przed dystrybucją. Nie przesądza własności domeny ani nazwy w sklepie.
-- Nazwa wyświetlana od M1-T1: „Terminie”. Techniczne `slug`, nazwa pakietu npm i applicationId pozostają bez zmian; aktualizacja nie tworzy osobnej aplikacji ani nie usuwa danych. Historyczne ADR-y i nazwa planowanego backupu pozostają zachowane.
+- Nazwa wyświetlana od M1-T1: „Termino”. Techniczne `slug`, nazwa pakietu npm i applicationId pozostają bez zmian; aktualizacja nie tworzy osobnej aplikacji ani nie usuwa danych. Historyczne ADR-y i nazwa planowanego backupu pozostają zachowane.
 - Nowe zależności dopiero w tasku, który ich używa. Zmiany bazy wyłącznie przez bezstratne migracje.
 
 ## Warianty startu

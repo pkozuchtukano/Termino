@@ -15,7 +15,7 @@ export function SpatialScreen({
       }
     >
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.brand}>Terminie</Text>
+        <Text style={styles.brand}>Termino</Text>
         <Text accessibilityRole="header" style={styles.title}>
           {title}
         </Text>

@@ -1,4 +1,4 @@
-# Terminie — Spatial Productivity
+# Termino — Spatial Productivity
 
 Source of truth: tokeny w `src/shared/theme/index.ts`; zmiany wartości aktualizują też ten dokument.
 
@@ -18,7 +18,7 @@ Zasady: ciemne tło, oddzielone przestrzenią karty bento, subtelne obramowania 
 
 ## IMPLEMENTED NOW
 
-- Dokumenty: nagłówek Terminie/Dokumenty, puste Najbliższe terminy i karty dokumentów.
+- Dokumenty: nagłówek Termino/Dokumenty, puste Najbliższe terminy i karty dokumentów.
 - Ustawienia: informacyjny placeholder bez aktywnych ustawień.
 - Dolny pasek: Dokumenty, centralna akcja Skanuj (min. 60 wysokości, subtelny cień), Ustawienia. Skanuj otwiera osobny AddDocument; nie jest tabem.
 - AddDocument: ilustracja obszaru skanowania i informacja o niedostępności funkcji. Brak aparatu/importu/OCR.
