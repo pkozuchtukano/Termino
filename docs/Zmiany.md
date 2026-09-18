@@ -4,6 +4,12 @@ Każdy przyszły task aktualizuje ten plik. Wpisy grupujemy według obszaru i op
 
 ## Fundament aplikacji
 
+### 2026-09-18 — Workflow tasków / terminie-task-workflow
+
+- Dodano projektowy skill w `.agents/skills/terminie-task-workflow/SKILL.md`: punktowe odczyty, hermetyczny zakres, automatyczna walidacja, lokalny commit i tekst PR bez publikacji.
+- Manualny smoke test wykonuje użytkownik; agent przygotowuje checklistę i nie zastępuje jej klikaniem po emulatorze. Bez zmian aplikacji i zależności.
+- Walidacja: Prettier, diff, UTF-8 i frontmatter przez istniejący parser YAML — OK. `quick_validate.py` zablokowany brakiem PyYAML; bez instalowania zależności. Sprawdzenie użycia skilla pozostaje po stronie użytkownika.
+
 ### 2026-09-18 — M1-T2 / Navigation + App Shell
 
 - Dodano typowany Root Stack (`Main`, `AddDocument`) i standardowe dolne taby Dokumenty/Ustawienia. Akcja „Dodaj” w nagłówku otwiera osobny ekran ponad shellem; Back wraca do poprzedniej sekcji. Świeży start otwiera Dokumenty, bez persistencji i deep linków aplikacji.

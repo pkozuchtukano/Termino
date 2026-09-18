@@ -2,6 +2,10 @@
 
 ## Fundament aplikacji
 
+### 2026-09-18 — Workflow tasków
+
+Dodano skill `terminie-task-workflow`, ograniczający odczyty i raporty oraz pozostawiający manualny smoke test użytkownikowi. Szczegóły: [docs/Zmiany.md](docs/Zmiany.md).
+
 ### 2026-09-18 — M1-T2 / Navigation + App Shell
 
 Dodano React Navigation: dolne sekcje Dokumenty/Ustawienia i osobny flow Dodaj dokument uruchamiany z nagłówka. Typowane trasy, Safe Area i trzy lokalne placeholdery zastąpiły feature `home`. Szczegóły zależności, walidacji i ograniczeń: [docs/Zmiany.md](docs/Zmiany.md).
